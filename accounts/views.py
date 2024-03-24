@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.tokens import default_token_generator
 from accounts.utils import detectUser, send_verification_email
 from vendor.forms import VendorForm
+from vendor.models import Vendor
 from .forms import UserForm
 from .models import User, UserProfile
 from django.contrib import messages,auth
@@ -77,7 +78,7 @@ def registerVendor(request):
         #Store the data and Create User
         form = UserForm(request.POST)
         v_form = VendorForm(request.POST,request.FILES)
-        if form.is_valid() and v_form.is_valid:
+        if form.is_valid() and v_form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             username = form.cleaned_data['username']
@@ -171,6 +172,7 @@ def custDashboard(request):
 @user_passes_test(check_role_vendor)
 @login_required(login_url='login')
 def vendorDashboard(request):
+    
     return render(request,'accounts/vendorDashboard.html')
 
 def forgot_password(request):

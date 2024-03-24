@@ -49,3 +49,38 @@ def send_verification_email(request,user, mail_subject, email_template):
 #     to_email = user.email
 #     mail = EmailMessage(mail_subject, message, from_email,to=[to_email])
 #     mail.send()
+
+
+# def send_notification(mail_subject, mail_template, context):
+#     from_email = settings.DEFAULT_FROM_EMAIL
+#     message = render_to_string(mail_template,context)
+#     to_email = context['user'].email
+#     mail = EmailMessage(mail_subject, message, from_email,to=[to_email])
+#     mail.content_subtype = "html" 
+#     mail.send()
+
+
+
+def send_notification(mail_subject, mail_template, context):
+    # Get the default sender email address from settings
+    from_email = settings.DEFAULT_FROM_EMAIL
+    
+    # Render the email message from the template and context
+    message_body = render_to_string(mail_template, context)
+    
+    # Get the recipient email address from the context
+    to_email = context['user'].email
+    
+    # Create an EmailMessage instance
+    email = EmailMessage(
+        subject=mail_subject,
+        body=message_body,
+        from_email=from_email,
+        to=[to_email]
+    )
+    
+    # Set content type to HTML
+    email.content_subtype = "html"
+    
+    # Send the email
+    email.send()
