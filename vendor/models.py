@@ -36,7 +36,7 @@ def save(self, request,*args, **kwargs):
                 #Send notification mail
                 mail_subject = "We're sorry! You are not eligible for publishing your food menu on our markplace"
                 send_notification(mail_subject,mail_template,context)
-    return super().save(request, *args,**kwargs)
+    return super(Vendor,self).save(request, *args,**kwargs)
 
 
 

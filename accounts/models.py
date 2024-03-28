@@ -81,7 +81,7 @@ class User(AbstractBaseUser):
     def get_role(self):
         if self.role == 1:
             user_role = 'Vendor'
-            return user_role
+            
             
         elif self.role == 2:
             user_role = 'Customer'
@@ -93,8 +93,7 @@ class UserProfile(models.Model):
     user = OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='users/profiel_pictures', blank=True, null=True)
     cover_photos = models.ImageField(upload_to='users/cover_photos', blank=True, null=True)
-    address1 = models.CharField(max_length=50,blank=True, null=True)
-    address2 = models.CharField(max_length=50,blank=True, null=True)
+    address = models.CharField(max_length=50,blank=True, null=True)  
     country = models.CharField(max_length=15,blank=True, null=True)
     state = models.CharField(max_length=15,blank=True, null=True)
     city = models.CharField(max_length=15,blank=True, null=True)
@@ -105,8 +104,8 @@ class UserProfile(models.Model):
     modified_at= models.DateTimeField(auto_now=True)
     
     
-    def full_address(self):
-        return f'{self.address1},{self.address2}'
+    # def full_address(self):
+    #     return f'{self.address1},{self.address2}'
         
     
     def __str__(self):

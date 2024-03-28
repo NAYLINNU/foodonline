@@ -25,3 +25,10 @@
     animation-duration: 8s;
     z-index: 99;
 }
+
+
+.btn.btn-info {
+    padding: 2px 1.5em;
+    font-size: 12px;
+    cursor: pointer;
+}
